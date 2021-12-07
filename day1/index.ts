@@ -1,24 +1,18 @@
-import fs from 'fs';
-import _ from 'lodash';
-
-const getNumbers = (file: string) => {
-    const text = fs.readFileSync(file).toString();
-    const lines = text.split('\n');
-    return lines.map(line => parseInt(line)).filter(_.isInteger);
-}
+import { readNumbers } from '../libraries';
+import { sum, zipWith, initial, tail } from 'lodash';
 
 const countIncreases = (numbers: number[]) => {
-    return _.sum(
-        _.zipWith(
-            _.initial(numbers),
-            _.tail(numbers),
+    return sum(
+        zipWith(
+            initial(numbers),
+            tail(numbers),
             (a, b) => a < b
         )
     );
 }
 
 const slidingWindow = (numbers: number[]) => {
-    return _.zipWith(
+    return zipWith(
         numbers.slice(0, numbers.length - 2),
         numbers.slice(1, numbers.length - 1),
         numbers.slice(2, numbers.length - 0),
@@ -26,9 +20,8 @@ const slidingWindow = (numbers: number[]) => {
     );
 }
 
-const numbers = getNumbers('day1/input.txt');
 //const numbers = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
+const numbers = readNumbers(__dirname + '/input.txt');
 const count = countIncreases(numbers);
-const sliding = slidingWindow(numbers);
-const slidingCount = countIncreases(sliding);
-console.log({ count, sliding, slidingCount });
+const slidingCount = countIncreases(slidingWindow(numbers));
+console.log({ count, slidingCount });
