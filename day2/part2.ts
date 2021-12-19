@@ -1,16 +1,7 @@
 import { words } from "lodash";
-import { parseLines, readLines } from "../libraries";
+import { readLines } from "../common/files";
 
-// const lines = parseLines(`
-// forward 5
-// down 5
-// forward 8
-// up 3
-// down 8
-// forward 2
-// `);
-
-const lines = readLines(__dirname + '/input.txt');
+const lines = readLines(__dirname);
 
 let position = 0;
 let depth = 0;

@@ -11,6 +11,6 @@ npm install
 
 ## How to run
 ```
+npm run all
 npm run day1
-npm run day2
 ```
